@@ -1,0 +1,43 @@
+plugins {
+	id 'org.springframework.boot' version '2.5.1'
+	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+	id 'java'
+}
+apply plugin: 'io.spring.dependency-management'
+
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+
+repositories {
+	mavenCentral()
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	compileOnly 'org.projectlombok:lombok'
+	runtimeOnly 'org.postgresql:postgresql'
+	annotationProcessor 'org.projectlombok:lombok'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	implementation group: 'javax.validation', name: 'validation-api', version: '2.0.1.Final'
+	
+	annotationProcessor 'org.seasar.doma:doma:2.29.0'	// Doma2 DaoImplの自動生成用
+	implementation 'org.seasar.doma:doma:2.29.0'	// Doma2の基本アノテーションが使える
+	implementation 'org.seasar.doma.boot:doma-spring-boot-starter:1.5.0'	// Doma2のSpring向けアノテーションが使える
+}
+task copySql(type: Copy) {
+ from './src/main/resources/META-INF'
+ into './build/classes/java/main/META-INF'
+
+}
+test {
+	useJUnitPlatform()
+}
